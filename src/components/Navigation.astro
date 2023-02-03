@@ -1,1 +1,29 @@
-<div class="w-52 p-2 border top-0 bottom-0 fixed">Gate</div>
+---
+const {
+  data,
+  data: { info },
+} = Astro.props;
+console.log(data);
+---
+
+<div class="w-52 p-2 top-0 bottom-0 fixed">
+  <div class="font-bold">{info.title}</div>
+  <div class="text-sm">{info.description}</div>
+  <ul>
+    {
+      Object.keys(data.paths).map((path) => (
+        <>
+          <div class="font-bold py=2 m-2">{path}</div>
+          {Object.keys(data.paths[path]).map((entry) => {
+            const operation = data.paths[path][entry];
+            return (
+              <a href="" class="pl-4 font-normal block">
+                {operation.operationId}
+              </a>
+            );
+          })}
+        </>
+      ))
+    }
+  </ul>
+</div>

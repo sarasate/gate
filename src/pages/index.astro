@@ -2,10 +2,14 @@
 import CodeView from "../components/CodeView.astro";
 import ContentView from "../components/ContentView.astro";
 import Layout from "../layouts/Layout.astro";
+import Navigation from "../components/Navigation.astro";
+
+import data from "../openapi/petstore.json";
 ---
 
 <Layout title="Gate - Static API documentation">
+  <Navigation data={data}>Gate</Navigation>
   <main class="ml-52 p-2 block min-h-full">
-    <ContentView />
+    <ContentView data={data} />
   </main>
 </Layout>
