@@ -1,1 +1,37 @@
-<div>Content View</div>
+---
+const {
+  data,
+  data: { info },
+} = Astro.props;
+---
+
+<div>
+  <h1>{info.title}</h1>
+
+  <div class="">
+    {
+      Object.keys(data.paths).map((pathKey) => {
+        const path = data.paths[pathKey];
+        return (
+          <div class="">
+            <span>{pathKey}  </span>
+              <div>{path.description}</div>
+              <div class="flex flex-col">
+                {Object.keys(path).map((key) => {
+                  const operation = path[key];
+                  return (
+                    <div class="m-4">
+                      <span class="badge badge-lg">{key.toLocaleUpperCase()}</span>
+                      <span>{data.basePath  + pathKey}</span>
+                      <div>{operation.description}</div>
+                    </div>
+                    <div class=""></div>
+                  );
+                })}
+            </div>
+          </div>
+        );
+      })
+    }
+  </div>
+</div>
