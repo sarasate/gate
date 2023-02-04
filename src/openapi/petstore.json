@@ -31,6 +31,7 @@
       "get": {
         "description": "Returns all pets from the system that the user has access to",
         "operationId": "findPets",
+        "summary": "Find pets",
         "parameters": [
           {
             "name": "tags",

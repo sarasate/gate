@@ -18,7 +18,7 @@ console.log(data);
             const operation = data.paths[path][entry];
             return (
               <a href="" class="pl-4 font-normal block">
-                {operation.operationId}
+                {operation.summary || operation.operationId}
               </a>
             );
           })}
