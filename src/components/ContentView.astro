@@ -26,6 +26,24 @@ const {
                       </span>
                       <span>{data.basePath + pathKey}</span>
                       <div class="my-4">{operation.description}</div>
+                      <div>
+                        {operation.parameters.some(
+                          (param) => param.in === "query"
+                        ) && <h2 class="font-bold">Query Params</h2>}
+                        {operation.parameters
+                          .filter((param) => param.in === "query")
+                          .map((param) => {
+                            return (
+                              <div>
+                                <div>
+                                  <span class="font-bold">{param.name}</span>{" "}
+                                  <span>{param.type}</span>
+                                </div>
+                                <div>{param.description}</div>
+                              </div>
+                            );
+                          })}
+                      </div>
                     </div>
                     <div class="" />
                   </div>
