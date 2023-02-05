@@ -5,18 +5,18 @@ const {
 } = Astro.props;
 ---
 
-<div>
-  <div class="">
-    {
-      Object.keys(data.paths).map((pathKey) => {
-        const path = data.paths[pathKey];
-        return (
-          <div>
-            <div class="flex flex-col">
-              {Object.keys(path).map((key) => {
-                const operation = path[key];
-                return (
-                  <div>
+<div class="">
+  {
+    Object.keys(data.paths).map((pathKey) => {
+      const path = data.paths[pathKey];
+      return (
+        <div>
+          <div class="flex flex-col">
+            {Object.keys(path).map((key) => {
+              const operation = path[key];
+              return (
+                <div class="flex">
+                  <div class="flex-1">
                     <div class="font-bold text-xl">
                       {operation.summary || operation.operationId}
                     </div>
@@ -45,14 +45,25 @@ const {
                           })}
                       </div>
                     </div>
-                    <div class="" />
                   </div>
-                );
-              })}
-            </div>
+                  <div class="flex-1">
+                    <div class="card shadow-lg">
+                      <div class="card-body">
+                        <div>Request sample: </div>
+                        <div>
+                          curl --request {key.toUpperCase()} --url '
+                          {data.basePath}' --header 'ContentType:
+                          application/json'
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
           </div>
-        );
-      })
-    }
-  </div>
+        </div>
+      );
+    })
+  }
 </div>
