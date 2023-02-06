@@ -34,7 +34,7 @@ const {
                           .filter((param) => param.in === "query")
                           .map((param) => {
                             return (
-                              <div>
+                              <div class="py-2">
                                 <div>
                                   <span class="font-bold">{param.name}</span>{" "}
                                   <span>{param.type}</span>
@@ -43,6 +43,35 @@ const {
                               </div>
                             );
                           })}
+                        {operation.responses[200] && (
+                          <h2 class="font-bold">Responses</h2>
+                        )}
+                        {operation.responses[200] && (
+                          <div class="py-2">
+                            <h3 class="font-bold">
+                              {operation.responses[200].description}
+                            </h3>
+                            <div>
+                              <span class="font-bold">200</span>{" "}
+                              <span>
+                                {operation.responses[200].description}
+                              </span>
+                            </div>
+                          </div>
+                        )}
+                        {operation.responses["default"] && (
+                          <div class="py-2">
+                            <h3 class="font-bold">
+                              {operation.responses["default"].description}
+                            </h3>
+                            <div>
+                              <span class="font-bold">default</span>{" "}
+                              <span>
+                                {operation.responses["default"].description}
+                              </span>
+                            </div>
+                          </div>
+                        )}
                       </div>
                     </div>
                   </div>
