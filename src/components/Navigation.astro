@@ -6,14 +6,14 @@ const {
 console.log(data);
 ---
 
-<div class="w-52 p-2 top-0 bottom-0 fixed">
+<div class="w-60 p-2 top-0 bottom-0 fixed">
   <div class="font-bold">{info.title}</div>
-  <div class="text-sm">{info.description}</div>
+  <!-- <div class="text-sm">{info.description}</div> -->
   <ul>
     {
       Object.keys(data.paths).map((path) => (
         <>
-          <div class="font-bold py=2 m-2">{path}</div>
+          <div class="font-bold py=2 m-2 break-all ">{path}</div>
           {Object.keys(data.paths[path]).map((entry) => {
             const operation = data.paths[path][entry];
             return (
