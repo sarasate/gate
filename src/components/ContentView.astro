@@ -27,11 +27,11 @@ const {
                       <span>{data.basePath + pathKey}</span>
                       <div class="my-4">{operation.description}</div>
                       <div>
-                        {operation.parameters.some(
+                        {operation.parameters?.some(
                           (param) => param.in === "query"
                         ) && <h2 class="font-bold">Query Params</h2>}
                         {operation.parameters
-                          .filter((param) => param.in === "query")
+                          ?.filter((param) => param.in === "query")
                           .map((param) => {
                             return (
                               <div class="py-2">
@@ -43,10 +43,10 @@ const {
                               </div>
                             );
                           })}
-                        {operation.responses[200] && (
+                        {operation.responses && operation.responses[200] && (
                           <h2 class="font-bold">Responses</h2>
                         )}
-                        {operation.responses[200] && (
+                        {operation.responses && operation.responses[200] && (
                           <div class="py-2">
                             <h3 class="font-bold">
                               {operation.responses[200].description}
@@ -59,19 +59,20 @@ const {
                             </div>
                           </div>
                         )}
-                        {operation.responses["default"] && (
-                          <div class="py-2">
-                            <h3 class="font-bold">
-                              {operation.responses["default"].description}
-                            </h3>
-                            <div>
-                              <span class="font-bold">default</span>{" "}
-                              <span>
+                        {operation.responses &&
+                          operation.responses["default"] && (
+                            <div class="py-2">
+                              <h3 class="font-bold">
                                 {operation.responses["default"].description}
-                              </span>
+                              </h3>
+                              <div>
+                                <span class="font-bold">default</span>{" "}
+                                <span>
+                                  {operation.responses["default"].description}
+                                </span>
+                              </div>
                             </div>
-                          </div>
-                        )}
+                          )}
                       </div>
                     </div>
                   </div>
