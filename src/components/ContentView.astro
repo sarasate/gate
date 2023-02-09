@@ -3,6 +3,7 @@ const {
   data,
   data: { info },
 } = Astro.props;
+const basePath = data.servers[0].url;
 ---
 
 <div class="">
@@ -24,7 +25,7 @@ const {
                       <span class="badge badge-lg">
                         {key.toLocaleUpperCase()}
                       </span>
-                      <span>{data.basePath + pathKey}</span>
+                      <span>{basePath + pathKey}</span>
                       <div class="my-4">{operation.description}</div>
                       <div>
                         {operation.parameters?.some(
@@ -81,8 +82,7 @@ const {
                       <div class="card-body">
                         <div>Request sample: </div>
                         <div>
-                          curl --request {key.toUpperCase()} --url '
-                          {data.basePath}
+                          curl --request {key.toUpperCase()} --url '{basePath}
                           {pathKey}' --header 'ContentType: application/json'
                         </div>
                       </div>
