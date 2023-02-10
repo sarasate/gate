@@ -12,20 +12,20 @@ console.log(data);
   <ul>
     {
       Object.keys(data.paths).map((path) => (
-        <>
-          <div class="font-bold py=2 m-2 break-all ">{path}</div>
+        <div class="p-2">
+          <div class="font-bold py-2 break-all ">{path}</div>
           {Object.keys(data.paths[path]).map((entry) => {
             const operation = data.paths[path][entry];
             return (
               <a
                 href={`#${operation.operationId}`}
-                class="pl-4 font-normal block"
+                class="pl-2 font-normal block"
               >
                 {operation.summary || operation.operationId}
               </a>
             );
           })}
-        </>
+        </div>
       ))
     }
   </ul>
