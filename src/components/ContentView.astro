@@ -4,8 +4,7 @@ const {
   tags,
   data: { info },
 } = Astro.props;
-const basePath = data.servers[0].url;
-const REQUESTS = ["GET", "PUT", "POST", "DELETE", "PATCH", "OPTIONS", "HEAD"];
+const basePath = data.servers?.[0].url;
 ---
 
 <div class="">
