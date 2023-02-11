@@ -1,32 +1,31 @@
 ---
+import { groupByTags } from "../utils/tag.filter";
 const {
   data,
+  tags,
   data: { info },
 } = Astro.props;
-console.log(data);
 ---
 
-<div class="w-60 p-2 top-0 bottom-0 fixed overflow-auto">
+<div class="w-72 p-2 top-0 bottom-0 fixed overflow-auto">
   <div class="font-bold">{info.title}</div>
-  <!-- <div class="text-sm">{info.description}</div> -->
   <ul>
     {
-      Object.keys(data.paths).map((path) => (
-        <div class="p-2">
-          <div class="font-bold py-2 break-all ">{path}</div>
-          {Object.keys(data.paths[path]).map((entry) => {
-            const operation = data.paths[path][entry];
-            return (
+      tags.map((tag) => {
+        return (
+          <div class="p-2">
+            <div class="font-bold py-2 break-all">{tag.name.toUpperCase()}</div>
+            {tag.operations.map((operation) => (
               <a
-                href={`#${operation.operationId}`}
                 class="pl-2 font-normal block"
+                href={`#${operation.operationId}`}
               >
-                {operation.summary || operation.operationId}
+                {operation.summary}
               </a>
-            );
-          })}
-        </div>
-      ))
+            ))}
+          </div>
+        );
+      })
     }
   </ul>
 </div>

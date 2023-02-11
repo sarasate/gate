@@ -1,6 +1,7 @@
 ---
 const {
   data,
+  tags,
   data: { info },
 } = Astro.props;
 const basePath = data.servers[0].url;
@@ -9,91 +10,90 @@ const REQUESTS = ["GET", "PUT", "POST", "DELETE", "PATCH", "OPTIONS", "HEAD"];
 
 <div class="">
   {
-    Object.keys(data.paths).map((pathKey) => {
-      const path = data.paths[pathKey];
+    tags.map((tag: any) => {
       return (
         <div>
-          <div class="flex flex-col">
-            {Object.keys(path)
-              .filter((key) => REQUESTS.includes(key.toUpperCase()))
-              .map((key) => {
-                const operation = path[key];
-                return (
-                  <div class="flex">
-                    <div class="flex-1">
-                      <div class="font-bold text-xl" id={operation.operationId}>
-                        {operation.summary || operation.operationId}
-                      </div>
-                      <div class="m-4">
-                        <span class="badge badge-lg">
-                          {key.toLocaleUpperCase()}
-                        </span>
-                        <span>{basePath + pathKey}</span>
-                        <div class="my-4">{operation.description}</div>
-                        <div>
-                          {operation.parameters?.some(
-                            (param) => param.in === "query"
-                          ) && <h2 class="font-bold">Query Params</h2>}
-                          {operation.parameters
-                            ?.filter((param) => param.in === "query")
-                            .map((param) => {
-                              return (
-                                <div class="py-2">
-                                  <div>
-                                    <span class="font-bold">{param.name}</span>{" "}
-                                    <span>{param.type}</span>
-                                  </div>
-                                  <div>{param.description}</div>
+          <div class="">
+            <div class="h1 uppercase">{tag.name}</div>
+            {tag.operations.map((operation: any) => {
+              return (
+                <div class="flex">
+                  <div class="flex-1">
+                    <div class="font-bold text-xl" id={operation.operationId}>
+                      {operation.summary}
+                    </div>
+                    <div class="m-4">
+                      <span class="badge badge-lg uppercase">
+                        {operation.method}
+                      </span>
+                      <span>{operation.path}</span>
+                      <div class="my-4">{operation.description}</div>
+                      <div>
+                        {operation.parameters?.some(
+                          (param) => param.in === "query"
+                        ) && <h2 class="font-bold">Query Params</h2>}
+                        {operation.parameters
+                          ?.filter((param) => param.in === "query")
+                          .map((param) => {
+                            return (
+                              <div class="py-2">
+                                <div>
+                                  <span class="font-bold">{param.name}</span>{" "}
+                                  <span>{param.type}</span>
                                 </div>
-                              );
-                            })}
-                          {operation.responses && operation.responses[200] && (
-                            <h2 class="font-bold">Responses</h2>
-                          )}
-                          {operation.responses && operation.responses[200] && (
+                                <div>{param.description}</div>
+                              </div>
+                            );
+                          })}
+                        {operation.responses && operation.responses[200] && (
+                          <h2 class="font-bold">Responses</h2>
+                        )}
+                        {operation.responses && operation.responses[200] && (
+                          <div class="py-2">
+                            <h3 class="font-bold">
+                              {operation.responses[200].description}
+                            </h3>
+                            <div>
+                              <span class="font-bold">200</span>{" "}
+                              <span>
+                                {operation.responses[200].description}
+                              </span>
+                            </div>
+                          </div>
+                        )}
+                        {operation.responses &&
+                          operation.responses["default"] && (
                             <div class="py-2">
                               <h3 class="font-bold">
-                                {operation.responses[200].description}
+                                {operation.responses["default"].description}
                               </h3>
                               <div>
-                                <span class="font-bold">200</span>{" "}
+                                <span class="font-bold">default</span>{" "}
                                 <span>
-                                  {operation.responses[200].description}
+                                  {operation.responses["default"].description}
                                 </span>
                               </div>
                             </div>
                           )}
-                          {operation.responses &&
-                            operation.responses["default"] && (
-                              <div class="py-2">
-                                <h3 class="font-bold">
-                                  {operation.responses["default"].description}
-                                </h3>
-                                <div>
-                                  <span class="font-bold">default</span>{" "}
-                                  <span>
-                                    {operation.responses["default"].description}
-                                  </span>
-                                </div>
-                              </div>
-                            )}
-                        </div>
                       </div>
                     </div>
-                    <div class="flex-1">
-                      <div class="card shadow-lg">
-                        <div class="card-body">
-                          <div>Request sample: </div>
-                          <div>
-                            curl --request {key.toUpperCase()} --url '{basePath}
-                            {pathKey}' --header 'ContentType: application/json'
-                          </div>
+                  </div>
+                  <div class="flex-1">
+                    <div class="card shadow-lg">
+                      <div class="card-body">
+                        <div>Request sample: </div>
+                        <div>
+                          curl --request {operation.method.toUpperCase()} --url
+                          '{basePath}
+                          {operation.path}' --header 'ContentType:
+                          application/json'
                         </div>
                       </div>
                     </div>
                   </div>
-                );
-              })}
+                </div>
+              );
+            })}
           </div>
         </div>
       );
