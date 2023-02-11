@@ -38,7 +38,9 @@ const basePath = data.servers?.[0].url;
                               <div>
                                 <span class="font-bold">{param.name}</span>{" "}
                                 <span>{param.type}</span>
+                                <span>{param.schema?.type}</span>
                               </div>
+
                               <div>{param.description}</div>
                             </div>
                           );
@@ -48,9 +50,6 @@ const basePath = data.servers?.[0].url;
                       )}
                       {operation.responses && operation.responses[200] && (
                         <div class="py-2">
-                          <h3 class="font-bold">
-                            {operation.responses[200].description}
-                          </h3>
                           <div>
                             <span class="font-bold">200</span>{" "}
                             <span>{operation.responses[200].description}</span>
@@ -60,9 +59,6 @@ const basePath = data.servers?.[0].url;
                       {operation.responses &&
                         operation.responses["default"] && (
                           <div class="py-2">
-                            <h3 class="font-bold">
-                              {operation.responses["default"].description}
-                            </h3>
                             <div>
                               <span class="font-bold">default</span>{" "}
                               <span>
