@@ -77,8 +77,11 @@ const basePath = data.servers?.[0].url;
                     <div class="card-body">
                       <div>Request sample: </div>
                       <div>
-                        curl --request {operation.method.toUpperCase()} --url '
-                        {basePath}
+                        curl --request{" "}
+                        <span class={operation.method}>
+                          {operation.method.toUpperCase()}
+                        </span>{" "}
+                        --url '{basePath}
                         {operation.path}' --header 'ContentType:
                         application/json'
                       </div>
@@ -102,23 +105,23 @@ const basePath = data.servers?.[0].url;
 
   @layer utilities {
     .get {
-      @apply bg-primary;
+      @apply text-primary;
     }
     .post,
     .put {
-      @apply bg-success text-gray-100;
+      @apply text-success;
     }
     .delete {
-      @apply bg-error text-gray-300;
+      @apply text-error;
     }
     .patch {
-      @apply bg-warning text-gray-100;
+      @apply text-warning;
     }
     .options {
-      @apply bg-info text-gray-100;
+      @apply text-info;
     }
     .head {
-      @apply bg-secondary text-gray-100;
+      @apply text-secondary;
     }
   }
 </style>
