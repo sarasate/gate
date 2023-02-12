@@ -14,7 +14,7 @@ const basePath = data.servers?.[0].url;
   </h1>
   <div
     class="prose prose-h2:text-lg"
-    set:html={marked.parse(info.description)}
+    set:html={info.description && marked.parse(info.description)}
   />
   <div class="divider"></div>
   {
@@ -38,7 +38,10 @@ const basePath = data.servers?.[0].url;
                     <span>{operation.path}</span>
                     <div
                       class="my-4 prose"
-                      set:html={marked.parse(operation.description)}
+                      set:html={
+                        operation.description &&
+                        marked.parse(operation.description)
+                      }
                     />
                     <div>
                       {operation.parameters?.some(
