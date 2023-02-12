@@ -17,7 +17,7 @@ const {
             <div class="font-bold py-2 break-all">{tag.name.toUpperCase()}</div>
             {tag.operations.map((operation) => (
               <a
-                class="pl-2 py-1 font-normal block"
+                class="pl-2 py-1 font-normal block hover:text-secondary-focus"
                 href={`#${operation.operationId}`}
               >
                 {operation.summary || operation.operationId || operation.method}
