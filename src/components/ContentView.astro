@@ -21,7 +21,9 @@ const basePath = data.servers?.[0].url;
                     {operation.summary}
                   </div>
                   <div class="m-4">
-                    <span class="badge badge-lg uppercase">
+                    <span
+                      class={`badge badge-lg uppercase ${operation.method}`}
+                    >
                       {operation.method}
                     </span>
                     <span>{operation.path}</span>
@@ -92,3 +94,31 @@ const basePath = data.servers?.[0].url;
     })
   }
 </div>
+
+<style>
+  @tailwind base;
+  @tailwind components;
+  @tailwind utilities;
+
+  @layer utilities {
+    .get {
+      @apply bg-primary;
+    }
+    .post,
+    .put {
+      @apply bg-success text-gray-100;
+    }
+    .delete {
+      @apply bg-error text-gray-300;
+    }
+    .patch {
+      @apply bg-warning text-gray-100;
+    }
+    .options {
+      @apply bg-info text-gray-100;
+    }
+    .head {
+      @apply bg-secondary text-gray-100;
+    }
+  }
+</style>
