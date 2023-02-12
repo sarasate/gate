@@ -1,4 +1,7 @@
 ---
+import { marked } from "marked";
+// const markdown = await response.text();
+// const content = marked.parse(markdown);
 const {
   data,
   tags,
@@ -22,12 +25,15 @@ const basePath = data.servers?.[0].url;
                   </div>
                   <div class="m-4">
                     <span
-                      class={`badge badge-lg uppercase ${operation.method}`}
+                      class={`badge badge-lg uppercase mr-2 ${operation.method}`}
                     >
                       {operation.method}
                     </span>
                     <span>{operation.path}</span>
-                    <div class="my-4">{operation.description}</div>
+                    <div
+                      class="my-4"
+                      set:html={marked.parse(operation.description)}
+                    />
                     <div>
                       {operation.parameters?.some(
                         (param) => param.in === "query"
