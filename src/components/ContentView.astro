@@ -1,7 +1,5 @@
 ---
 import { marked } from "marked";
-// const markdown = await response.text();
-// const content = marked.parse(markdown);
 const {
   data,
   tags,
@@ -11,6 +9,14 @@ const basePath = data.servers?.[0].url;
 ---
 
 <div class="">
+  <h1 class="font-bold text-xl my-4" id="title">
+    {info.title}
+  </h1>
+  <div
+    class="prose prose-h2:text-lg"
+    set:html={marked.parse(info.description)}
+  />
+  <div class="divider">kk</div>
   {
     tags.map((tag: any) => {
       return (
@@ -31,7 +37,7 @@ const basePath = data.servers?.[0].url;
                     </span>
                     <span>{operation.path}</span>
                     <div
-                      class="my-4"
+                      class="my-4 prose"
                       set:html={marked.parse(operation.description)}
                     />
                     <div>
