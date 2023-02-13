@@ -11,6 +11,9 @@ const basePath = data.servers?.[0].url;
 <div class="pl-4">
   <h1 class="font-bold text-xl my-4" id="title">
     {info.title}
+    <div class="badge ml-2">
+      {info.version && <span class="text-sm">v{info.version}</span>}
+    </div>
   </h1>
   <div
     class="prose prose-h2:text-lg"
