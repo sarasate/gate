@@ -1,11 +1,13 @@
 ---
 import { marked } from "marked";
+import { getRef } from "../utils/tag.filter";
 const {
   data,
   tags,
   data: { info },
 } = Astro.props;
-const basePath = data.servers?.[0].url;
+const urls = data.servers;
+const baseUrl = urls?.[0].url;
 ---
 
 <div class="pl-4">
@@ -15,6 +17,7 @@ const basePath = data.servers?.[0].url;
       {info.version && <span class="text-sm">v{info.version}</span>}
     </div>
   </h1>
+  <div>{data}</div>
   <div
     class="prose prose-h2:text-lg"
     set:html={info.description && marked.parse(info.description)}
@@ -73,6 +76,18 @@ const basePath = data.servers?.[0].url;
                           <div>
                             <span class="font-bold">200</span>{" "}
                             <span>{operation.responses[200].description}</span>
+                            <div>
+                              <pre>
+                                <code>
+                                  {getRef(
+                                    data,
+                                    operation.responses[200].content?.[
+                                      "application/json"
+                                    ]?.schema?.$ref
+                                  )}
+                                </code>
+                              </pre>
+                            </div>
                           </div>
                         </div>
                       )}
@@ -99,7 +114,7 @@ const basePath = data.servers?.[0].url;
                         <span class={operation.method}>
                           {operation.method.toUpperCase()}
                         </span>{" "}
-                        --url '{basePath}
+                        --url '{baseUrl}
                         {operation.path}' --header 'ContentType:
                         application/json'
                       </div>
