@@ -10,7 +10,7 @@ const tags = groupByTags(data);
 ---
 
 <Layout title="Gate - Static API documentation">
-  <Navigation data={data} tags={tags}>Gate</Navigation>
+  <Navigation data={data} tags={tags} />
   <main class="ml-72 p-2 block min-h-full">
     <ContentView data={data} tags={tags} />
   </main>

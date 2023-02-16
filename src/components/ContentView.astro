@@ -1,23 +1,26 @@
 ---
 import { marked } from "marked";
 import { getRef } from "../utils/tag.filter";
+import ResponseBody from "./ResponseBody.astro";
 const {
   data,
   tags,
   data: { info },
 } = Astro.props;
 const urls = data.servers;
-const baseUrl = urls?.[0].url;
+const baseUrl = urls?.[0].url || data.host;
 ---
 
 <div class="pl-4">
-  <h1 class="font-bold text-xl my-4" id="title">
+  <h1 class="font-bold text-xl my-2" id="title">
     {info.title}
     <div class="badge ml-2">
       {info.version && <span class="text-sm">v{info.version}</span>}
     </div>
   </h1>
-  <div>{data}</div>
+  <div class="badge badge-lg badge-primary mb-4">
+    {data.host || data.servers?.[0]?.url}
+  </div>
   <div
     class="prose prose-h2:text-lg"
     set:html={info.description && marked.parse(info.description)}
@@ -77,16 +80,12 @@ const baseUrl = urls?.[0].url;
                             <span class="font-bold">200</span>{" "}
                             <span>{operation.responses[200].description}</span>
                             <div>
-                              <pre>
-                                <code>
-                                  {getRef(
-                                    data,
-                                    operation.responses[200].content?.[
-                                      "application/json"
-                                    ]?.schema?.$ref
-                                  )}
-                                </code>
-                              </pre>
+                              <code>
+                                <ResponseBody
+                                  data={data}
+                                  operation={operation}
+                                />
+                              </code>
                             </div>
                           </div>
                         </div>
@@ -94,12 +93,10 @@ const baseUrl = urls?.[0].url;
                       {operation.responses &&
                         operation.responses["default"] && (
                           <div class="py-2">
-                            <div>
-                              <span class="font-bold">default</span>{" "}
-                              <span>
-                                {operation.responses["default"].description}
-                              </span>
-                            </div>
+                            <span class="font-bold">default</span>{" "}
+                            <span>
+                              {operation.responses["default"].description}
+                            </span>
                           </div>
                         )}
                     </div>

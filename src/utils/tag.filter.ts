@@ -20,10 +20,11 @@ export const groupByTags = (data) => {
 };
 
 export const getRef = (data, ref) => {
-  if (!ref) return null;
+  if (!ref || typeof ref !== "string") return {};
+  console.log(ref);
   const refPath = ref.slice(2).split("/");
-
   // Get the value of the reference
-  const result = data?.[refPath?.[0]]?.[refPath?.[1]]?.[refPath?.[2]] || "";
-  return JSON.stringify(result, null, 2);
+  const result = data?.[refPath?.[0]]?.[refPath?.[1]]?.[refPath?.[2]] || {};
+  console.log(result);
+  return result;
 };
