@@ -1,5 +1,7 @@
 ---
 import { getRef } from "../utils/tag.filter";
+import { marked } from "marked";
+import Param from "./Param.astro";
 
 const { data, operation } = Astro.props;
 const body = getRef(
@@ -9,23 +11,14 @@ const body = getRef(
 ---
 
 <div>
-  <h2 class="font-bold py-4">Body</h2>
+  <h2 class="font-bold py-4 p-">Body</h2>
   <code>
     <div>{body.description}</div>
     <div>
       {
         body.properties &&
           Object.entries(body.properties).map(([key, value]) => {
-            // console.log(value);
-            return (
-              <div>
-                <span class="font-bold">{key}</span>
-                <span>{value.type}</span>
-                {value.items &&
-                  value.items.$ref &&
-                  getRef(data, value.items.$ref).title}
-              </div>
-            );
+            return <Param data={data} key={key} param={value} />;
           })
       }
     </div>

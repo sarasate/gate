@@ -1,0 +1,30 @@
+---
+import { marked } from "marked";
+import { getRef } from "../utils/tag.filter";
+const { data, key, param, indent = false } = Astro.props;
+import Param from "./Param.astro";
+---
+
+<div class={`py-2 ${indent ? "ml-8" : "pl-0"}`}>
+  <span class="font-bold">{key}</span>
+  <span>{param.type}</span>
+  <div
+    class="text-sm prose"
+    set:html={param.description && marked.parse(param.description)}
+  />
+  {
+    param.allOf &&
+      param.allOf.map((item) => {
+        return (
+          <div>
+            {item.$ref &&
+              Object.entries(getRef(data, item.$ref)?.properties || {}).map(
+                ([key, entry]) => (
+                  <Param data={data} key={key} param={entry} indent="true" />
+                )
+              )}
+          </div>
+        );
+      })
+  }
+</div>
