@@ -12,11 +12,11 @@
   },
   "dependencies": {
     "@astrojs/tailwind": "^3.0.1",
-    "astro": "^2.0.6",
-    "autoprefixer": "^10.0.2",
-    "daisyui": "^2.50.0",
-    "postcss": "^8.1.6",
-    "tailwindcss": "^3.0.24"
+    "astro": "^2.0.14",
+    "autoprefixer": "^10.4.13",
+    "daisyui": "^2.50.1",
+    "postcss": "^8.4.21",
+    "tailwindcss": "^3.2.7"
   },
   "devDependencies": {
     "@tailwindcss/typography": "^0.5.9",
