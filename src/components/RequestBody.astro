@@ -6,7 +6,7 @@ import Param from "./Param.astro";
 const { data, operation } = Astro.props;
 const body = getRef(
   data,
-  operation.responses?.[200].content?.["application/json"]?.schema?.$ref
+  operation.requestBody?.content?.["application/json"]?.schema?.$ref
 );
 ---
 

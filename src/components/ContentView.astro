@@ -1,6 +1,7 @@
 ---
 import { marked } from "marked";
 import { getRef } from "../utils/tag.filter";
+import RequestBody from "./RequestBody.astro";
 import ResponseBody from "./ResponseBody.astro";
 const {
   data,
@@ -71,6 +72,13 @@ const baseUrl = urls?.[0].url || data.host;
                             </div>
                           );
                         })}
+
+                      {operation.requestBody && (
+                        <h2 class="font-bold">Request</h2>
+                       <RequestBody data={data} operation={operation} /> 
+
+                      )}
+
                       {operation.responses && operation.responses[200] && (
                         <h2 class="font-bold">Responses</h2>
                       )}
