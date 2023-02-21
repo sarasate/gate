@@ -30,8 +30,8 @@ const baseUrl = urls?.[0].url || data.host;
   {
     tags.map((tag: any) => {
       return (
-        <div class="">
-          <div class="h1 uppercase">{tag.name}</div>
+        <div>
+          <h1 class="uppercase">{tag.name}</h1>
           {tag.operations.map((operation: any) => {
             return (
               <div class="flex">
