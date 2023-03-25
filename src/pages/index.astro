@@ -9,9 +9,9 @@ import { groupByTags } from "../utils/tag.filter";
 const tags = groupByTags(data);
 ---
 
-<Layout title="Gate - Static API documentation">
-  <Navigation data={data} tags={tags} />
-  <main class="ml-72 p-2 block min-h-full">
+<Layout title="Gate - Static API documentation" data={data}>
+  <div class="flex flex-col lg:flex-row top-0 bottom-0">
+    <Navigation data={data} tags={tags} />
     <ContentView data={data} tags={tags} />
-  </main>
+  </div>
 </Layout>

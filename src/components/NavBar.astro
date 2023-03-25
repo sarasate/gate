@@ -1,0 +1,15 @@
+---
+const {
+  data,
+  tags,
+  data: { info },
+} = Astro.props;
+---
+
+<nav class="navbar bg-primary 2">
+  <div class="flex items-center justify-between px-2">
+    <div>
+      <a href="/" class="text-white font-bold text-xl">{info.title}</a>
+    </div>
+  </div>
+</nav>

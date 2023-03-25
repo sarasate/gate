@@ -1,5 +1,4 @@
 ---
-import { groupByTags } from "../utils/tag.filter";
 const {
   data,
   tags,
@@ -7,27 +6,30 @@ const {
 } = Astro.props;
 ---
 
-<div
-  class="w-72 p-2 top-0 bottom-0 fixed overflow-auto border-r dark:border-gray-700"
->
-  <a href="#" class="font-bold">{info.title}</a>
-  <ul>
-    {
-      tags.map((tag) => {
-        return (
-          <div class="p-2">
-            <div class="font-bold py-2 break-all">{tag.name.toUpperCase()}</div>
-            {tag.operations.map((operation) => (
-              <a
-                class="pl-2 py-1 font-normal block hover:text-secondary-focus"
-                href={`#${operation.operationId}`}
-              >
-                {operation.summary || operation.operationId || operation.method}
-              </a>
-            ))}
-          </div>
-        );
-      })
-    }
-  </ul>
+<div class="w-72 p-2 border-r dark:border-gray-700">
+  <div class="sidebar h-screen overflow-y-auto">
+    <ul>
+      {
+        tags.map((tag) => {
+          return (
+            <div class="p-2">
+              <div class="font-bold py-2 break-all">
+                {tag.name.toUpperCase()}
+              </div>
+              {tag.operations.map((operation) => (
+                <a
+                  class="pl-2 py-1 font-normal block hover:text-secondary-focus"
+                  href={`#${operation.operationId}`}
+                >
+                  {operation.summary ||
+                    operation.operationId ||
+                    operation.method}
+                </a>
+              ))}
+            </div>
+          );
+        })
+      }
+    </ul>
+  </div>
 </div>

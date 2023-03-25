@@ -1,6 +1,5 @@
 ---
 import { marked } from "marked";
-import { getRef } from "../utils/tag.filter";
 import RequestBody from "./RequestBody.astro";
 import ResponseBody from "./ResponseBody.astro";
 const {
@@ -12,7 +11,8 @@ const urls = data.servers;
 const baseUrl = urls?.[0].url || data.host;
 ---
 
-<div class="pl-4">
+<div class="pl-4 flex-1">
+  <div class="sidebar h-screen overflow-y-auto">
   <h1 class="font-bold text-xl my-2" id="title">
     {info.title}
     <div class="badge ml-2">
@@ -134,6 +134,7 @@ const baseUrl = urls?.[0].url || data.host;
       );
     })
   }
+  </div>
 </div>
 
 <style>
