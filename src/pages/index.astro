@@ -10,7 +10,7 @@ const tags = groupByTags(data);
 ---
 
 <Layout title="Gate - Static API documentation" data={data}>
-  <div class="flex flex-col lg:flex-row top-0 bottom-0">
+  <div class="flex flex-col lg:flex-row top-0 bottom-0 overflow-hidden">
     <Navigation data={data} tags={tags} />
     <ContentView data={data} tags={tags} />
   </div>
