@@ -1,26 +1,20 @@
 ---
-import { getRef } from "../utils/tag.filter";
-import { marked } from "marked";
 import Param from "./Param.astro";
 
 const { data, operation } = Astro.props;
-const body = getRef(
-  data,
-  operation.responses?.[200].content?.["application/json"]?.schema?.$ref
-);
 ---
 
 <div>
-  <h3 class="font-bold italic py-4 p-">Body</h3>
   <code>
-    <div>{body.description}</div>
-    <div>
-      {
-        body.properties &&
-          Object.entries(body.properties).map(([key, value]) => {
-            return <Param data={data} key={key} param={value} />;
-          })
-      }
-    </div>
+    <div><span class="font-bold">{operation}</span> - {data.description}</div>
+    Body
   </code>
+  <div>
+    {
+      data?.schema?.properties &&
+        Object.entries(data.schema.properties).map(([key, value]) => {
+          return <Param data={data} key={key} param={value} />;
+        })
+    }
+  </div>
 </div>

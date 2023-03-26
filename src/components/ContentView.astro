@@ -79,34 +79,24 @@ const baseUrl = urls?.[0].url || data.host;
 
                       )}
 
-                      {operation.responses && operation.responses[200] && (
-                        <h2 class="font-bold">Responses</h2>
-                      )}
-                      {operation.responses && operation.responses[200] && (
-                        <div class="py-2">
-                          <div>
-                            <span class="font-bold">200</span>{" "}
-                            <span>{operation.responses[200].description}</span>
-                            <div>
-                              <code>
-                                <ResponseBody
-                                  data={data}
-                                  operation={operation}
-                                />
-                              </code>
+                      <h2 class="font-bold">Responses</h2>
+                      {operation.responses&&Object.entries(operation.responses).map(
+                        ([key, value]) => {
+                          return (
+                            <div class="py-2">
+                              <div>
+                                <code>
+                                  <ResponseBody
+                                    data={value}
+                                    operation={key}
+                                  />
+                                </code>
+                              </div>
                             </div>
-                          </div>
-                        </div>
+                          );
+                        }
                       )}
-                      {operation.responses &&
-                        operation.responses["default"] && (
-                          <div class="py-2">
-                            <span class="font-bold">default</span>{" "}
-                            <span>
-                              {operation.responses["default"].description}
-                            </span>
-                          </div>
-                        )}
+
                     </div>
                   </div>
                 </div>
