@@ -16,6 +16,7 @@
     "autoprefixer": "^10.4.14",
     "daisyui": "^2.51.3",
     "postcss": "^8.4.21",
+    "swagger-client": "^3.19.3",
     "tailwindcss": "^3.2.7"
   },
   "devDependencies": {

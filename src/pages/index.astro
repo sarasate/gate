@@ -3,8 +3,16 @@ import ContentView from "../components/ContentView.astro";
 import Layout from "../layouts/Layout.astro";
 import Navigation from "../components/Navigation.astro";
 
-import data from "../openapi/netlify.json";
+import json from "../openapi/shipengine.json";
 import { groupByTags } from "../utils/tag.filter";
+
+import SwaggerClient from "swagger-client";
+
+// Fetch resolved spec from openapie definition
+// TODO Fetch from POJO or URL
+const spec = await SwaggerClient({ spec: json });
+const { spec: data } = spec;
+// Filter date by tags for navigation
 const tags = groupByTags(data);
 ---
 
