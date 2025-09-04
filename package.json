@@ -13,7 +13,7 @@
   "dependencies": {
     "@astrojs/tailwind": "^5.1.4",
     "astro": "^5.1.8",
-    "autoprefixer": "^10.4.14",
+    "autoprefixer": "^10.4.21",
     "daisyui": "^4.12.23",
     "postcss": "^8.4.21",
     "swagger-client": "^3.19.3",
